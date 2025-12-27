@@ -1,722 +1,591 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>某某科技有限公司 - 官方网站</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    /* 全局样式 */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        "Helvetica Neue", Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: #222;
+      background-color: #f6f7fb;
+      line-height: 1.6;
+    }
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* 头部导航 */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.95);
+      border-bottom: 1px solid #e4e7f0;
+      backdrop-filter: blur(12px);
+    }
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 10px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+      color: #1f2937;
+    }
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      font-size: 14px;
+      color: #4b5563;
+    }
+    .nav-links a {
+      position: relative;
+      padding: 4px 0;
+    }
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(90deg, #2563eb, #4f46e5);
+      transition: width 0.2s ease;
+    }
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    .nav-cta {
+      padding: 8px 18px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 12px 24px rgba(37, 99, 235, 0.25);
+    }
+
+    /* 顶部整体占位，防止内容被遮挡 */
+    .header-spacer {
+      height: 64px;
+    }
+
+    /* Hero 区 */
+    .hero {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 60px 20px 80px;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #2563eb;
+      background: rgba(37, 99, 235, 0.06);
+      border: 1px solid rgba(37, 99, 235, 0.15);
+      margin-bottom: 18px;
+    }
+    .hero-tag-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+    .hero-title {
+      font-size: 36px;
+      line-height: 1.25;
+      font-weight: 700;
+      color: #111827;
+      margin-bottom: 14px;
+    }
+    .hero-subtitle {
+      font-size: 15px;
+      color: #6b7280;
+      max-width: 480px;
+      margin-bottom: 26px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+    .btn-primary {
+      padding: 10px 24px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      color: #fff;
+      font-size: 14px;
+      font-weight: 500;
+      border: none;
+      cursor: pointer;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.3);
+    }
+    .btn-outline {
+      padding: 9px 22px;
+      border-radius: 999px;
+      border: 1px solid #d1d5db;
+      background: #fff;
+      color: #374151;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 12px;
+      color: #6b7280;
+    }
+    .hero-meta span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-meta-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #9ca3af;
+    }
+
+    /* 右侧“插画” */
+    .hero-visual {
+      position: relative;
+      padding: 26px;
+      border-radius: 26px;
+      background: radial-gradient(circle at top left, #eff6ff 0, #eef2ff 40%, #e5e7eb 100%);
+      box-shadow: 0 18px 40px rgba(148, 163, 184, 0.5);
+      overflow: hidden;
+      min-height: 260px;
+    }
+    .hero-card-main {
+      position: relative;
+      background: #fff;
+      padding: 18px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
+      margin-bottom: 14px;
+    }
+    .hero-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .hero-card-title {
+      font-size: 13px;
+      color: #374151;
+      font-weight: 600;
+    }
+    .hero-card-status {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: rgba(16, 185, 129, 0.1);
+      color: #059669;
+    }
+    .hero-chart {
+      height: 110px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.08), rgba(56, 189, 248, 0.08));
+      position: relative;
+      overflow: hidden;
+      padding: 10px;
+      display: flex;
+      align-items: flex-end;
+      gap: 4px;
+    }
+    .hero-chart-bar {
+      flex: 1;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #2563eb, #4f46e5);
+      opacity: 0.8;
+    }
+    .hero-chart-bar:nth-child(2) {
+      height: 50%;
+      background: linear-gradient(180deg, #22c55e, #16a34a);
+    }
+    .hero-chart-bar:nth-child(3) {
+      height: 70%;
+    }
+    .hero-chart-bar:nth-child(4) {
+      height: 40%;
+      background: linear-gradient(180deg, #f59e0b, #d97706);
+    }
+    .hero-chart-bar:nth-child(5) {
+      height: 90%;
+    }
+    .hero-chart-bar:nth-child(6) {
+      height: 65%;
+      background: linear-gradient(180deg, #38bdf8, #0284c7);
+    }
+    .hero-chart-bar:nth-child(1) {
+      height: 30%;
+    }
+
+    .hero-floating-card {
+      position: absolute;
+      right: 18px;
+      bottom: 22px;
+      background: rgba(15, 23, 42, 0.9);
+      color: #e5e7eb;
+      padding: 10px 12px;
+      border-radius: 14px;
+      font-size: 11px;
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.6);
+    }
+    .hero-floating-title {
+      font-size: 11px;
+      margin-bottom: 4px;
+      color: #9ca3af;
+    }
+    .hero-floating-number {
+      font-size: 18px;
+      font-weight: 600;
+      color: #fefce8;
+      margin-bottom: 4px;
+    }
+    .hero-floating-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      color: #bbf7d0;
+    }
+    .hero-floating-tag span {
+      font-size: 11px;
+    }
+
+    /* 品牌/合作伙伴 区 */
+    .brands {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 40px;
+      color: #6b7280;
+      font-size: 13px;
+    }
+    .brands-title {
+      margin-bottom: 16px;
+    }
+    .brands-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 24px;
+      font-size: 13px;
+      color: #9ca3af;
+    }
+
+    /* 三列优势模块 */
+    .features {
+      background: #fff;
+      border-radius: 32px 32px 0 0;
+      box-shadow: 0 -4px 25px rgba(148, 163, 184, 0.3);
+      margin-top: 20px;
+      padding: 50px 20px 60px;
+    }
+    .features-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .section-head {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+    .section-title {
+      font-size: 24px;
+      color: #111827;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .section-subtitle {
+      font-size: 14px;
+      color: #6b7280;
+    }
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .feature-item {
+      background: #f9fafb;
+      border-radius: 18px;
+      padding: 20px;
+      border: 1px solid #e5e7eb;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    }
+    .feature-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px rgba(148, 163, 184, 0.35);
+      border-color: #2563eb;
+    }
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #2563eb, #4f46e5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 18px;
+      margin-bottom: 12px;
+    }
+    .feature-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: #111827;
+      margin-bottom: 6px;
+    }
+    .feature-desc {
+      font-size: 13px;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+    .feature-meta {
+      font-size: 12px;
+      color: #9ca3af;
+    }
+
+    /* 底部 */
+    footer {
+      border-top: 1px solid #e5e7eb;
+      margin-top: 10px;
+      padding: 18px 20px 26px;
+      font-size: 12px;
+      color: #9ca3af;
+      background: #f9fafb;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+    .footer-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* 简单的响应式 */
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 40px;
+      }
+      .hero-visual {
+        order: -1;
+      }
+      .nav-links {
+        display: none; /* 简化：移动端隐藏导航菜单 */
+      }
+      .header-spacer {
+        height: 58px;
+      }
+      .hero-title {
+        font-size: 28px;
+      }
+      .features {
+        border-radius: 24px 24px 0 0;
+      }
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+  <!-- 顶部导航 -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">
+        <div class="logo-mark">M</div>
+        <span>某某科技有限公司</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#about">关于我们</a>
+        <a href="#solutions">解决方案</a>
+        <a href="#cases">客户案例</a>
+        <a href="#contact">联系我们</a>
+        <a href="#" class="nav-cta">获取方案</a>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+  <!-- 用于抵消 fixed 头部的高度 -->
+  <div class="header-spacer"></div>
+
+  <!-- Hero 区 -->
+  <main>
+    <section class="hero">
+      <div>
+        <div class="hero-tag">
+          <span class="hero-tag-dot"></span>
+          <span>企业数字化 · 一站式服务</span>
         </div>
+        <h1 class="hero-title">
+          让数据驱动业务增长，<br />
+          构建属于你的智能企业中枢。
+        </h1>
+        <p class="hero-subtitle">
+          我们专注于为中小企业提供专业的数字化转型解决方案，从战略咨询到系统落地，
+          帮你搭建安全、可扩展、可度量的业务基础设施。
+        </p>
+        <div class="hero-actions">
+          <button class="btn-primary">预约免费咨询</button>
+          <button class="btn-outline">下载产品白皮书</button>
+        </div>
+        <div class="hero-meta">
+          <span>
+            <span class="hero-meta-dot"></span>
+            已服务超过 300+ 家企业客户
+          </span>
+          <span>
+            <span class="hero-meta-dot"></span>
+            平均交付周期缩短 40%
+          </span>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-card-main">
+          <div class="hero-card-header">
+            <div class="hero-card-title">业务实时运营看板</div>
+            <div class="hero-card-status">在线 · 正常</div>
+          </div>
+          <div class="hero-chart">
+            <div class="hero-chart-bar"></div>
+            <div class="hero-chart-bar"></div>
+            <div class="hero-chart-bar"></div>
+            <div class="hero-chart-bar"></div>
+            <div class="hero-chart-bar"></div>
+            <div class="hero-chart-bar"></div>
+          </div>
+        </div>
+        <div class="hero-floating-card">
+          <div class="hero-floating-title">本月核心指标增长</div>
+          <div class="hero-floating-number">+38.6%</div>
+          <div class="hero-floating-tag">
+            <span>▲</span>
+            <span>已超越同业 82% 企业</span>
+          </div>
+        </div>
+      </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
+    <!-- 品牌区 -->
+    <section class="brands" id="cases">
+      <div class="brands-title">他们都在使用某某科技的数字化解决方案</div>
+      <div class="brands-row">
+        <span>星启集团</span>
+        <span>宏信制造</span>
+        <span>蓝海物流</span>
+        <span>远见金融</span>
+        <span>云杉零售</span>
+      </div>
     </section>
 
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
+    <!-- 三大优势 / 简介区 -->
+    <section class="features" id="solutions">
+      <div class="features-inner">
+        <div class="section-head">
+          <h2 class="section-title">一站式数字化转型伙伴</h2>
+          <p class="section-subtitle">
+            从前期规划到落地运维，我们提供覆盖全生命周期的专业服务，
+            帮助企业在可控成本下实现持续增长。
+          </p>
         </div>
+
+        <div class="feature-grid">
+          <div class="feature-item">
+            <div class="feature-icon">①</div>
+            <div class="feature-title">战略规划与咨询</div>
+            <p class="feature-desc">
+              深度理解企业现状与业务目标，梳理关键流程与数据资产，
+              制定可执行的数字化路线图与阶段性目标。
+            </p>
+            <div class="feature-meta">适用于：准备启动数字化转型的企业</div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">②</div>
+            <div class="feature-title">系统集成与平台搭建</div>
+            <p class="feature-desc">
+              打通多系统、多部门之间的数据孤岛，以统一的平台承载业务流程，
+              支持弹性扩展与多终端访问。
+            </p>
+            <div class="feature-meta">适用于：已有多个系统但协同效率低的企业</div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">③</div>
+            <div class="feature-title">智能分析与持续优化</div>
+            <p class="feature-desc">
+              基于可视化报表与智能算法，对业务指标进行实时监控与优化，
+              帮助管理层更快做出数据驱动的决策。
+            </p>
+            <div class="feature-meta">适用于：希望精细化运营与持续增长的企业</div>
+          </div>
+        </div>
+      </div>
     </section>
+  </main>
 
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+  <!-- 页脚 -->
+  <footer id="contact">
+    <div class="footer-inner">
+      <div>© 2025 某某科技有限公司 · 保留所有权利</div>
+      <div class="footer-links">
+        <a href="#about">公司介绍</a>
+        <a href="#solutions">解决方案</a>
+        <a href="#cases">客户案例</a>
+        <a href="#">隐私政策</a>
+      </div>
+    </div>
+  </footer>
 </body>
-
 </html>
